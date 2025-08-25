@@ -15,16 +15,15 @@ int http_server_init_event(const char *http_addr, int http_port) {
    struct evhttp *http_server;
    struct event *sig_int;
    base = event_base_new();
-   uuid_t session_uuid;
-   uuid_generate(session_uuid);
+   event_base_dispatch(base);
    http_server = evhttp_new(base);
    evhttp_bind_socket(http_server, http_addr, http_port);
    for (int i = 0; routes[i].path != NULL; i++) {
 
-      evhttp_set_allowed_methods(http_server, routes[i].methods);
       if (routes[i].path == "/sessions") {
+         evhttp_set_allowed_methods(http_server, routes[i].methods);
          evhttp_set_cb(http_server, routes[i].path, routes[i].handler,
-                       session_uuid);
+                       NULL);
       } else {
          evhttp_set_cb(http_server, routes[i].path, routes[i].handler,
                        NULL); // Fonction de routing vers /health et /session
