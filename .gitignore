@@ -58,3 +58,4 @@ dkms.conf
 .vscode
 Hydrasync
 roadmap
+.clang-format

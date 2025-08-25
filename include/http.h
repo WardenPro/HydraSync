@@ -6,6 +6,11 @@
 #include <event2/buffer.h>
 #include <event2/event.h>
 #include <event2/http.h>
+#include <uuid/uuid.h>
+
+struct session_store {
+    int session_token;
+};
 
 struct route_entry {
     const char *path;
