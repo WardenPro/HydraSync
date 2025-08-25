@@ -1,8 +1,8 @@
 #include "http.h"
 
 struct route_entry routes[] = {
-    {"/health", health_handler},
-    {"/sessions", sessions_handler},
+    {"/health", health_handler, EVHTTP_REQ_GET},
+    {"/sessions", sessions_handler, EVHTTP_REQ_POST},
 };
 
 static void signal_cb(evutil_socket_t fd, short event, void *arg) {
@@ -20,6 +20,8 @@ int http_server_init_event(const char *http_addr, int http_port) {
    http_server = evhttp_new(base);
    evhttp_bind_socket(http_server, http_addr, http_port);
    for (int i = 0; routes[i].path != NULL; i++) {
+
+      evhttp_set_allowed_methods(http_server, routes[i].methods);
       if (routes[i].path == "/sessions") {
          evhttp_set_cb(http_server, routes[i].path, routes[i].handler,
                        session_uuid);

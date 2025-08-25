@@ -15,6 +15,7 @@ struct session_store {
 struct route_entry {
     const char *path;
     void (*handler)(struct evhttp_request *, void *arg);
+    ev_uint32_t methods;
 };
 
 int http_server_init_event(const char* addr, int port);
