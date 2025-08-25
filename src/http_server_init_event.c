@@ -1,7 +1,7 @@
 #include "http.h"
 
 struct route_entry routes[] = {
-    { "/healthz", health_handler },
+    { "/health", health_handler },
     { "/sessions", sessions_handler },
 };
 

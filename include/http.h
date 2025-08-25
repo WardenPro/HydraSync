@@ -13,7 +13,7 @@ struct route_entry {
 };
 
 int http_server_init_event(const char* addr, int port);
-static void health_handler(struct evhttp_request *req, void *ctx);
-static void sessions_handler(struct evhttp_request *req, void *ctx);
+void health_handler(struct evhttp_request *req, void *ctx);
+void sessions_handler(struct evhttp_request *req, void *ctx);
 
 #endif // HTTP_H

@@ -1,7 +1,6 @@
 #include "http.h"
 
-static void
-health_handler(struct evhttp_request *req, void *ctx)
+void health_handler(struct evhttp_request *req, void *ctx)
 {
         struct evbuffer *reply = evbuffer_new();
 
