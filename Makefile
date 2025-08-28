@@ -1,7 +1,7 @@
 # Variables
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c99 -Iinclude
-LDFLAGS = -lm -levent -luuid
+CFLAGS = -Wall -Wextra -std=c99 -Iinclude -I/opt/homebrew/Cellar/libevent/2.1.12_1/include
+LDFLAGS = -lm -L/opt/homebrew/Cellar/libevent/2.1.12_1/lib -levent_core -levent_extra -levent_pthreads -levent
 SRCDIR = src
 OBJDIR = obj
 INCDIR = include

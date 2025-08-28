@@ -1,6 +1,6 @@
 #include "http.h"
 
-struct route_entry routes[] = {
+route_entry routes[] = {
     {"/health", health_handler, EVHTTP_REQ_GET},
     {"/sessions", sessions_handler, EVHTTP_REQ_POST},
     {NULL, NULL, 0} // Terminator
@@ -22,6 +22,7 @@ int http_server_init_event(const char *http_addr, int http_port) {
       evhttp_set_cb(http_server, routes[i].path, routes[i].handler,
                     &routes[i]); // Pass route info as context
    }
+   evhttp_set_gencb(http_server, sessions_handler, NULL); 
 
    sig_int = evsignal_new(base, SIGINT, signal_cb, base);
    event_add(sig_int, NULL);
